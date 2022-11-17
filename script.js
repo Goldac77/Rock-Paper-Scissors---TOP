@@ -1,58 +1,66 @@
-var playerScore = 0
-var computerScore = 0
+const buttons = document.querySelectorAll('button')
+buttons.forEach((button) => {
+	button.addEventListener("click", () => {
+		playRound(button.innerHTML, computerPlay())
+		game()
+	})
+})
+const display = document.querySelector("#display")
+const score = document.querySelector("#score")
 
 function computerPlay(){
-	let choices = ["rock", "paper", "scissors"]
+	let choices = ["Rock", "Paper", "Scissors"]
 	let randomChoice = Math.floor(Math.random()*2)
 	return choices[randomChoice]
 }
 
+var playerScore = 0
+var computerScore = 0
+
 function playRound(playerSelection, computerSelection){
 
-	playerSelection = prompt("Rock, Paper, or Scissors...?")
-	playerSelection = playerSelection.toLowerCase()
-	computerSelection = computerPlay()
-
-	if(playerSelection == "rock" && computerSelection == "rock"){
-		return "It's a Draw!"
-	} else if(playerSelection == "rock" && computerSelection == "paper"){
+	if(playerSelection == "Rock" && computerSelection == "Rock"){
+		display.innerHTML = "It's a Draw!"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Rock" && computerSelection == "Paper"){
 		computerScore++
-		return "You Lose! Paper beats Rock"
-	} else if(playerSelection == "rock" && computerSelection == "scissors"){
+		display.innerHTML = "You Lose! Paper beats Rock"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Rock" && computerSelection == "Scissors"){
 		playerScore++
-		return "You Win! Paper beats Rock"
-	} else if(playerSelection == "paper" && computerSelection == "rock"){
+		display.innerHTML = "You Win! Paper beats Rock"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Paper" && computerSelection == "Rock"){
 		playerScore++
-		return "You Win! Paper beats Rock"
-	} else if(playerSelection == "paper" && computerSelection == "paper"){
-		return "It's a Draw!"
-	} else if(playerSelection == "paper" && computerSelection == "scissors"){
+		display.innerHTML = "You Win! Paper beats Rock"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Paper" && computerSelection == "Paper"){
+		display.innerHTML = "It's a Draw!"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Paper" && computerSelection == "Scissors"){
 		computerScore++
-		return "You Lose! Scissors beats Paper"
-	} else if(playerSelection == "scissors" && computerSelection == "rock"){
+		display.innerHTML = "You Lose! Scissors beats Paper"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Scissors" && computerSelection == "Rock"){
 		computerScore++
-		return "You Lose! Rock beats Scissors"
-	} else if(playerSelection == "scissors" && computerSelection == "paper"){
+		display.innerHTML = "You Lose! Rock beats Scissors"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Scissors" && computerSelection == "Paper"){
 		playerScore++
-		return "You Win! Scissors beats Paper"
-	} else if(playerSelection == "scissors" && computerSelection == "scissors"){
-		return "It's a Draw!"
+		display.innerHTML = "You Win! Scissors beats Paper"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
+	} else if(playerSelection == "Scissors" && computerSelection == "Scissors"){
+		display.innerHTML = "It's a Draw!"
+		score.innerHTML = `Your Score: ${playerScore} <br/> Computer Score: ${computerScore}`
 	}
 
 }
 
 function game(){
-	for(let i = 0; i < 5; i++){
-		console.log(playRound())
-	}
-
-	if(playerScore > computerScore){
-		alert(`You win :) \n Your Score: ${playerScore} \n Computer Score: ${computerScore}`)
-	} else if(playerScore == computerScore){
-		alert(`It's a draw \n Your Score: ${playerScore} \n Computer Score: ${computerScore}`)
-	} else {
-		alert(`You Lose :/ \n Your Score: ${playerScore} \n Computer Score: ${computerScore}`)
+	if(playerScore > computerScore && playerScore == 5){
+		alert("You Win!!!")
+	} else if(computerScore > playerScore && computerScore == 5){
+		alert("You Lose!!!")
 	}
 }
 
-game()

@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+
+body {
+    text-align: center;
+    padding-top: 20px;
+}
